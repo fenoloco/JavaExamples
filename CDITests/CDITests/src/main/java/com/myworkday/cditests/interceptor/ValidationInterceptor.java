@@ -1,5 +1,7 @@
 package com.myworkday.cditests.interceptor;
 
+import com.myworkday.cditests.ws.exception.FaultBean;
+import com.myworkday.cditests.ws.exception.MyServiceException;
 import java.util.Set;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
@@ -19,10 +21,14 @@ public class ValidationInterceptor {
             ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
             Validator validator = factory.getValidator();
             Set<ConstraintViolation<Object>> constraintViolations = validator.validate(param);
-
             for (ConstraintViolation<Object> viol : constraintViolations) {
-                System.out.println(viol.getMessage());
-                System.out.println(viol.getPropertyPath());
+                System.out.println("ERROR::::" + viol.getMessage() + " property:" + viol.getPropertyPath());
+            }
+            if (constraintViolations.size() > 0) {
+                FaultBean fault = new FaultBean();
+                fault.setResponseCode("CodeInterceptor");
+                fault.setResponseDesc("Response from interceptor");
+                throw new MyServiceException("Error from exception interceptor", fault);
             }
         }
 
