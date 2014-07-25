@@ -3,6 +3,7 @@ package com.myworkday.cditests.ws;
 import com.myworkday.cditests.interceptor.ValidationInterceptor;
 import com.myworkday.cditests.model.Car;
 import com.myworkday.cditests.ws.exception.FaultBean;
+import com.myworkday.cditests.ws.exception.FaultBeanDetails;
 import com.myworkday.cditests.ws.exception.MyServiceException;
 import javax.interceptor.Interceptors;
 import javax.jws.WebMethod;
@@ -30,10 +31,12 @@ public class BeanValidatonWs {
 
     @WebMethod(operationName = "ValidateCarThrows")
     public String validateCarMethodThrows(@WebParam(name = "car") Car car) throws MyServiceException {
-        FaultBean fault = new FaultBean();
-        fault.setResponseCode("189");
-        fault.setResponseDesc("Response error");
-        throw new MyServiceException("Error message", fault);
+        FaultBean faults = new FaultBean();
+        FaultBeanDetails detail = new FaultBeanDetails();
+        detail.setResponseCode("189");
+        detail.setResponseDesc("Response error");
+        faults.addFault(detail);
+        throw new MyServiceException("Error message", faults);
     }
 
     @WebMethod(operationName = "ValidateCarIterceptorThrows")

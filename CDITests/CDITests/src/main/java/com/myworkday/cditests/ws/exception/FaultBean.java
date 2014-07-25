@@ -1,6 +1,8 @@
 package com.myworkday.cditests.ws.exception;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -11,30 +13,28 @@ import javax.xml.bind.annotation.XmlType;
  * @author Mauri
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Errors", propOrder = {
-    "responseCode", "responseDesc"
-})
+@XmlType(name = "Errors")
 public class FaultBean implements Serializable {
 
     @XmlElement(required = true)
-    private String responseCode;
-    @XmlElement(required = true)
-    private String responseDesc;
+    private List<FaultBeanDetails> faults;
 
-    public String getResponseCode() {
-        return responseCode;
+    public FaultBean() {
+        this.faults = new ArrayList<FaultBeanDetails>();
+    }
+    
+    
+
+    public List<FaultBeanDetails> getFaults() {
+        return faults;
     }
 
-    public void setResponseCode(String responseCode) {
-        this.responseCode = responseCode;
+    public void setFaults(List<FaultBeanDetails> faults) {
+        this.faults = faults;
     }
 
-    public String getResponseDesc() {
-        return responseDesc;
-    }
-
-    public void setResponseDesc(String responseDesc) {
-        this.responseDesc = responseDesc;
+    public void addFault(FaultBeanDetails detail) {
+       this.faults.add(detail);
     }
 
 }

@@ -12,6 +12,8 @@ public class Car {
     private String modelo;
     @CustomValidator(2)
     private long puertas;
+    @CustomValidator(3)
+    private long ventanas;
 
     public String getMarca() {
         return marca;
@@ -35,6 +37,14 @@ public class Car {
 
     public void setPuertas(long puertas) {
         this.puertas = puertas;
+    }
+
+    public long getVentanas() {
+        return ventanas;
+    }
+
+    public void setVentanas(long ventanas) {
+        this.ventanas = ventanas;
     }
 
     @Override
