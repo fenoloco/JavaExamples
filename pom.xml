@@ -11,6 +11,6 @@
     <groupId>com.myworkday</groupId>
     <name>JavaExamples</name>
     <modules>
-        <module>CDITests/CDITests</module>
+        <module>CDITests</module>
     </modules>
 </project>
