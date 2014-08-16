@@ -12,5 +12,6 @@
     <name>JavaExamples</name>
     <modules>
         <module>CDITests</module>
+        <module>ApacheCommonPoolTest</module>
     </modules>
 </project>
